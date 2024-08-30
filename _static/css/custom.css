@@ -60,14 +60,14 @@ html, body {
   background-color: #282A34;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1024px) {
   .md-search__inner {
     width: 14rem;
   }
 }
 
 /* Fixes for mobile navbar */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   .md-nav--primary .md-nav__title[for="__drawer"] {
     background-color: black;
     margin-top: -2rem;
@@ -104,7 +104,7 @@ html, body {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   .md-nav__source {
     background-color: black;
   }
@@ -206,7 +206,7 @@ html .md-footer-meta.md-typeset a {
 }
 
 /* Footer mobile display */
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
     .vl, .hv {
         display: none;
     }
