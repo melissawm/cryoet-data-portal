@@ -10,8 +10,17 @@ html, body {
   font-family: "Inter";
 }
 
-.md-typeset a {
-  color: rgb(1 66 164);
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #1A6CEF;
+  --md-code-bg-color: #F6F6F6;
+  --md-code-fg-color: #000000;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #101010;
+  --md-primary-fg-color: #A2C9FF;
+  --md-code-bg-color: #494949;
+  --md-code-fg-color: #FFFFFF;
 }
 
 /* Header */
@@ -228,3 +237,39 @@ html .md-footer-meta.md-typeset a {
       align-items: baseline;
     }
 }
+
+/* Accordions */
+.md-typeset .admonition, .md-typeset details {
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  border-bottom: 0.01rem solid rgba(0, 0, 0, .3);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.md-typeset .admonition-title, .md-typeset summary {
+  background-color: unset;
+}
+
+.md-typeset .admonition-title::before, .md-typeset summary::before {
+  content: unset;
+}
+
+.md-typeset details.admonition summary.admonition-title {
+  margin-left: -2rem;
+}
+
+/* Note */
+div.note.admonition {
+  background-color: #e9f1ff;
+}
+
+div.note.admonition :not(.admonition-title) > p{
+  margin-left: 1.4rem;
+  margin-right: 0.4rem;
+}
+.md-typeset :is(.note) > :is(.admonition-title, summary) {
+  background-color: unset !important;
+}
+
