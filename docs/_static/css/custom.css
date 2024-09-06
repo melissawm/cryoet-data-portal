@@ -1,5 +1,4 @@
 /* Main textual elements */
-
 html, body {
   --md-text-font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -239,7 +238,7 @@ html .md-footer-meta.md-typeset a {
 }
 
 /* Accordions */
-.md-typeset .admonition, .md-typeset details {
+/* .md-typeset .admonition, .md-typeset details {
   border: none;
   background-color: white;
   box-shadow: none;
@@ -258,18 +257,21 @@ html .md-footer-meta.md-typeset a {
 
 .md-typeset details.admonition summary.admonition-title {
   margin-left: -2rem;
-}
+} */
 
 /* Note */
-div.note.admonition {
+/* div.note.admonition {
   background-color: #e9f1ff;
 }
 
-div.note.admonition :not(.admonition-title) > p{
+div.note.admonition p{
   margin-left: 1.4rem;
   margin-right: 0.4rem;
 }
 .md-typeset :is(.note) > :is(.admonition-title, summary) {
   background-color: unset !important;
-}
+} */
 
+/* .md-typeset .admonition-title::before, .md-typeset summary::before {
+  content: 
+} */

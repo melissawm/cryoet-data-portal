@@ -26,6 +26,7 @@ extensions = [
     "myst_nb",
     "sphinx_immaterial",
     "sphinx_external_toc",
+    "sphinx.ext.autosummary",
 ]
 
 napoleon_custom_sections = ["Lifecycle"]
@@ -46,6 +47,7 @@ intersphinx_mapping = {
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md"]
 autodoc_class_signature = "separated"
+autosummary_generate = True
 
 source_suffix = [".rst", ".md"]
 
@@ -115,6 +117,17 @@ object_description_options = [
     ("py:method", dict(toc_icon_class=None, include_in_toc=False)),
     ("py:attribute", dict(include_in_toc=False)),
     ("py:.*", dict(include_fields_in_toc=False)),
+]
+
+sphinx_immaterial_icon_path = ["./_static/img/"]
+sphinx_immaterial_custom_admonitions = [
+    {
+        "name": "note",
+        "color": "#e9f1ff",
+        #"icon": "IconExclamationMarkCircleLarge",
+        "icon": "fontawesome/solid/recycle",
+        "override": True,
+    },
 ]
 
 # html_js_files = [
