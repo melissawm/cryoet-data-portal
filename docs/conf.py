@@ -26,16 +26,21 @@ extensions = [
     "myst_nb",
     "sphinx_immaterial",
     "sphinx_external_toc",
-    "sphinx.ext.autosummary",
+    "sphinx_immaterial.apidoc.python.apigen",
 ]
 
-napoleon_custom_sections = ["Lifecycle"]
-autodoc_default_options = {
-    "member-order": "alphabetical",
-    "exclude-members": "__init__",
+python_apigen_modules = {
+    "cryoet_data_portal": "api",
 }
-autodoc_typehints = "none"
-autoclass_content = "both"
+python_apigen_order_tiebreaker = "alphabetical"
+
+napoleon_custom_sections = ["Lifecycle"]
+# autodoc_default_options = {
+#     "member-order": "alphabetical",
+#     "exclude-members": "__init__",
+# }
+# autodoc_typehints = "none"
+# autoclass_content = "both"
 tiledb_version = "latest"
 
 intersphinx_mapping = {
@@ -123,9 +128,9 @@ sphinx_immaterial_icon_path = ["./_static/img/"]
 sphinx_immaterial_custom_admonitions = [
     {
         "name": "note",
+        "title": "Note",
         "color": "#e9f1ff",
-        #"icon": "IconExclamationMarkCircleLarge",
-        "icon": "fontawesome/solid/recycle",
+        "icon": "IconExclamationMarkCircleLarge",
         "override": True,
     },
 ]

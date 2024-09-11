@@ -5,6 +5,9 @@ subtrees:
     title: "Home"
   - file: cryoet_data_portal_docsite_quick_start.md
   - file: python-api.md
+    subtrees:
+    - entries:
+      - glob: api*
   - file: cryoet_data_portal_docsite_data.md
   - file: tutorials.md
     subtrees:

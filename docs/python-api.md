@@ -1,5 +1,5 @@
 ---
-hide-navigation: true
+hide-navigation: false
 ---
 
 # Python API
@@ -20,8 +20,9 @@ A simplified diagram of the graph data model is below:
 
 ## API documentation
 
-```{eval-rst}
+<!-- ```{eval-rst}
 .. automodule:: cryoet_data_portal
    :members:
    :inherited-members:
-```
+``` -->
+
