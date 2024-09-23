@@ -15,10 +15,32 @@ We welcome feedback from the community on the data structure, design and functio
 
 ## Getting Started
 
-- [Installation](https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html)
-- [Python Client API Reference](https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html)
-- [Tutorials](./tutorials.md)
-- [napari Plugin Documentation](https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html)
+````{grid} 2
+
+```{grid-item-card}
+:link: https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html
+Installation
+```
+
+```{grid-item-card}
+:link: https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html
+Python Client API Reference
+```
+````
+
+````{grid} 2
+
+```{grid-item-card}
+:link: ./tutorials.md
+Tutorials
+```
+
+```{grid-item-card}
+:link: https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html
+napari Plugin Documentation
+```
+
+````
 
 ## Amazon Web Services S3 Bucket Info
 
