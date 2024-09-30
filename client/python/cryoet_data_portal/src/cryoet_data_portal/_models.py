@@ -60,6 +60,7 @@ class Dataset(Model):
         tissue_id (str): UBERON identifier for the tissue
         tissue_name (str): Name of the tissue from which a biological sample used in a CryoET study is derived from.
         title (str): Title of a CryoET dataset
+
     """
 
     _gql_type: str = "datasets"
@@ -110,6 +111,27 @@ class Dataset(Model):
         """
         recursive_prefix = "/".join(self.s3_prefix.strip("/").split("/")[:-1]) + "/"
         download_directory(self.s3_prefix, recursive_prefix, dest_path)
+
+    @classmethod
+    def get_by_id(cls, client: Client, id: int):
+        """Find objects by primary key
+
+        Args:
+            client:
+                A CryoET Portal API Client
+            id:
+                Unique identifier for the object
+
+        Returns:
+            A matching Model object if found, None otherwise.
+
+        Examples:
+            Get a Dataset by ID:
+
+            >>> dataset = Dataset.get_by_id(client, 1)
+                print(dataset.name)
+        """
+        super().get_by_id(client=client, id=id)
 
 
 class DatasetAuthor(Model):
