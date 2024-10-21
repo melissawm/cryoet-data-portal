@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.2a34f4ce0268c4983.min.css?v=df3fe83d" />
         <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=b05aeb11" />
+        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=4b7c366f" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1075,12 +1075,58 @@
 <h1 id="data-organization"><span id="id1"></span>Data Organization<a class="headerlink" href="#data-organization" title="Link to this heading">¶</a></h1>
 <p>The Data Portal is organized in a hierarchical structure. We welcome contributions to the Portal. <a class="reference external" href="https://airtable.com/apppmytRJXoXYTO9w/shr5UxgeQcUTSGyiY?prefill_Event=Portal&amp;amp;hide_Event=true">Use this form</a> to express interest in adding your data to the Portal.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<figure class="align-center" id="id2">
-<img alt="CryoET Data Portal Data Schema" src="_images/data_schema.png" />
-<figcaption>
-<p><span class="caption-text"><span class="caption-text">
-CryoET Data Portal Data Hierarchy</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></figcaption>
-</figure>
+<div class="mermaid-diagram docutils">
+<pre class="mermaid">
+<code class="docutils literal notranslate"><span class="pre">erDiagram</span>
+&#160;&#160; <span class="pre">Dataset</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Dataset</span> <span class="pre">||--}o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;runs&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignments&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">Annotation</span> <span class="pre">:</span> <span class="pre">&quot;annotations&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--||</span> <span class="pre">Dataset</span> <span class="pre">:</span> <span class="pre">&quot;dataset&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">Frame</span> <span class="pre">:</span> <span class="pre">&quot;frames&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">Tiltseries</span> <span class="pre">:</span> <span class="pre">&quot;tiltseries&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">TomogramVoxelSpacing</span> <span class="pre">:</span> <span class="pre">&quot;tomogram_voxel_spacings&quot;</span>
+&#160;&#160; <span class="pre">Run</span> <span class="pre">||--}o</span> <span class="pre">Tomogram</span> <span class="pre">:</span> <span class="pre">&quot;tomograms&quot;</span>
+&#160;&#160; <span class="pre">Tomogram</span> <span class="pre">||--|o</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignment&quot;</span>
+&#160;&#160; <span class="pre">Tomogram</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Tomogram</span> <span class="pre">||--|o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">Tomogram</span> <span class="pre">||--|o</span> <span class="pre">TomogramVoxelSpacing</span> <span class="pre">:</span> <span class="pre">&quot;tomogram_voxel_spacing&quot;</span>
+&#160;&#160; <span class="pre">Tomogram</span> <span class="pre">||--|o</span> <span class="pre">Any</span> <span class="pre">:</span> <span class="pre">&quot;affine_transformation_matrix&quot;</span>
+&#160;&#160; <span class="pre">TomogramVoxelSpacing</span> <span class="pre">||--}o</span> <span class="pre">AnnotationFile</span> <span class="pre">:</span> <span class="pre">&quot;annotation_files&quot;</span>
+&#160;&#160; <span class="pre">TomogramVoxelSpacing</span> <span class="pre">||--|o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">TomogramVoxelSpacing</span> <span class="pre">||--}o</span> <span class="pre">Tomogram</span> <span class="pre">:</span> <span class="pre">&quot;tomograms&quot;</span>
+&#160;&#160; <span class="pre">AnnotationFile</span> <span class="pre">||--|o</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignment&quot;</span>
+&#160;&#160; <span class="pre">AnnotationFile</span> <span class="pre">||--|o</span> <span class="pre">AnnotationShape</span> <span class="pre">:</span> <span class="pre">&quot;annotation_shape&quot;</span>
+&#160;&#160; <span class="pre">AnnotationFile</span> <span class="pre">||--|o</span> <span class="pre">TomogramVoxelSpacing</span> <span class="pre">:</span> <span class="pre">&quot;tomogram_voxel_spacing&quot;</span>
+&#160;&#160; <span class="pre">AnnotationShape</span> <span class="pre">||--|o</span> <span class="pre">Annotation</span> <span class="pre">:</span> <span class="pre">&quot;annotation&quot;</span>
+&#160;&#160; <span class="pre">AnnotationShape</span> <span class="pre">||--}o</span> <span class="pre">AnnotationFile</span> <span class="pre">:</span> <span class="pre">&quot;annotation_files&quot;</span>
+&#160;&#160; <span class="pre">Annotation</span> <span class="pre">||--|o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">Annotation</span> <span class="pre">||--}o</span> <span class="pre">AnnotationShape</span> <span class="pre">:</span> <span class="pre">&quot;annotation_shapes&quot;</span>
+&#160;&#160; <span class="pre">Annotation</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignments&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">Annotation</span> <span class="pre">:</span> <span class="pre">&quot;annotations&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">Dataset</span> <span class="pre">:</span> <span class="pre">&quot;datasets&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">Frame</span> <span class="pre">:</span> <span class="pre">&quot;frames&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">Tiltseries</span> <span class="pre">:</span> <span class="pre">&quot;tiltseries&quot;</span>
+&#160;&#160; <span class="pre">Deposition</span> <span class="pre">||--}o</span> <span class="pre">DepositionType</span> <span class="pre">:</span> <span class="pre">&quot;deposition_types&quot;</span>
+&#160;&#160; <span class="pre">DepositionType</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Tiltseries</span> <span class="pre">||--}o</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignments&quot;</span>
+&#160;&#160; <span class="pre">Tiltseries</span> <span class="pre">||--}o</span> <span class="pre">PerSectionParameters</span> <span class="pre">:</span> <span class="pre">&quot;per_section_parameters&quot;</span>
+&#160;&#160; <span class="pre">Tiltseries</span> <span class="pre">||--||</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">Tiltseries</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">PerSectionParameters</span> <span class="pre">||--||</span> <span class="pre">Frame</span> <span class="pre">:</span> <span class="pre">&quot;frame&quot;</span>
+&#160;&#160; <span class="pre">PerSectionParameters</span> <span class="pre">||--||</span> <span class="pre">Tiltseries</span> <span class="pre">:</span> <span class="pre">&quot;tiltseries&quot;</span>
+&#160;&#160; <span class="pre">Frame</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Frame</span> <span class="pre">||--}o</span> <span class="pre">PerSectionParameters</span> <span class="pre">:</span> <span class="pre">&quot;per_section_parameters&quot;</span>
+&#160;&#160; <span class="pre">Frame</span> <span class="pre">||--|o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--}o</span> <span class="pre">AnnotationFile</span> <span class="pre">:</span> <span class="pre">&quot;annotation_files&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--}o</span> <span class="pre">PerSectionAlignmentParameters</span> <span class="pre">:</span> <span class="pre">&quot;per_section_alignments&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--|o</span> <span class="pre">Deposition</span> <span class="pre">:</span> <span class="pre">&quot;deposition&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--|o</span> <span class="pre">Tiltseries</span> <span class="pre">:</span> <span class="pre">&quot;tiltseries&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--}o</span> <span class="pre">Tomogram</span> <span class="pre">:</span> <span class="pre">&quot;tomograms&quot;</span>
+&#160;&#160; <span class="pre">Alignment</span> <span class="pre">||--|o</span> <span class="pre">Run</span> <span class="pre">:</span> <span class="pre">&quot;run&quot;</span>
+&#160;&#160; <span class="pre">PerSectionAlignmentParameters</span> <span class="pre">||--||</span> <span class="pre">Alignment</span> <span class="pre">:</span> <span class="pre">&quot;alignment&quot;</span></code></pre></div>
+<p><em>Simplified version of the CryoET Data Portal Data Hierarchy. <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal-backend/blob/main/schema/api/v2.0.0/codegen/ER_DIAGRAM.md">See the full diagram</a></em></p>
 <p>As shown in the diagram above, the CryoET Data Portal has 3 levels in the data hierarchy:</p>
 <ul class="simple">
 <li><p><strong>Dataset</strong> is a set of image files for tilt series, reconstructed tomograms, and cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared with the same conditions. The dataset title, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Datasets typically contain multiple runs (see below). Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
@@ -1258,11 +1304,11 @@ CryoET Data Portal Data Hierarchy</span><a class="headerlink" href="#id2" title=
 </tbody>
 </table>
 <h3 id="dataset-download-options">Dataset Download Options<a class="headerlink" href="#dataset-download-options" title="Link to this heading">¶</a></h3>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id2">
 <img alt="File Structure of a downloaded dataset" src="_images/dataset_download.png" />
 <figcaption>
 <p><span class="caption-text"><span class="caption-text">
-File Structure of a downloaded dataset</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></figcaption>
+File Structure of a downloaded dataset</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></figcaption>
 </figure>
 <p>The <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Dataset</span></code> button opens a dialog with instructions for downloading the dataset using <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a>. Datasets are downloaded as folders named the Dataset ID. As shown in the diagram above, the folder contains subfolders for each run named the author-chosen run name, a folder named Images which contains the key photos of the dataset displayed on the Portal, and a JSON file named <code class="docutils literal notranslate"><span class="pre">dataset_metadata.json</span></code> containing the dataset metadata. The run folders contain subfolders named Tomogram and TiltSeries, containing the tomogram and tilt series image files, and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. More details on the run folder file structure is found in the documentation <a class="reference internal" href="#run-download-options">below</a>.</p>
 <p>The metadata schema of any JSON file stored with the data on the data portal’s S3 bucket is described in LinkML and can be found <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal-backend/tree/main/schema">here</a>.</p>
@@ -1421,11 +1467,11 @@ File Structure of a downloaded dataset</span><a class="headerlink" href="#id3" t
 <span class="n">run</span><span class="o">.</span><span class="n">download_everything</span><span class="p">()</span>
 </code></pre></div>
 </div>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id3">
 <img alt="File Structure of a downloaded run" src="_images/run_download.png" />
 <figcaption>
 <p><span class="caption-text"><span class="caption-text">
-File Structure of a downloaded run</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></figcaption>
+File Structure of a downloaded run</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></figcaption>
 </figure>
 <p>Runs are downloaded as folders named the author-chosen run name. As shown in the diagram above, the folder contains subfolders named Tomograms and TiltSeries and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. The Tomogram folder has a subfolder for every voxel spacing available, and each of those folders contains subfolders NeuorglancerPrecompute, which has files for visualizing the data in Neuroglancer; KeyPhotos, which contains the key photos of the run displayed on the Portal; CanonicalTomogram, which has the tomogram as an MRC file and OME-Zarr directory along with tomogram metadata and metadata for visualizing the tomogram with Neuroglancer; and Annotations. More details on the Annotation folder file structure is found in the documentation <a class="reference internal" href="#annotation-download-options">below</a>. The TiltSeries folder contains the tilt series images as an MRC file and OME-Zarr directory as well as a JSON file with the tilt series metadata.</p>
 <h2 id="annotations">Annotations<a class="headerlink" href="#annotations" title="Link to this heading">¶</a></h2>
@@ -1550,11 +1596,11 @@ File Structure of a downloaded run</span><a class="headerlink" href="#id4" title
 <p>Instance Segmentations, Oriented Points, and Points all can be downloaded directly in the browser as Newline Delimited JSON (ndJSON) files, where each line in the file is its own JSON. The download dialog also has instructions for downloading using curl, <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a>. In all cases, the JSON entries have a <code class="docutils literal notranslate"><span class="pre">type</span></code> field with instancePoint, orientedPoint, and point for Instance Segmentations, Oriented Points, and Points, respectively, and a <code class="docutils literal notranslate"><span class="pre">location</span></code> field with the x, y, z coordinates. For Instance Segmentations, there is also an <code class="docutils literal notranslate"><span class="pre">instance_id</span></code> to group points into geometric segmentation masks. For Oriented Points, there is also an <code class="docutils literal notranslate"><span class="pre">xyz_rotation_matrix</span></code> field with a 3x3 rotation matrix corresponding to each point.</p>
 <p>Semantic segmentation masks can downloaded using <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a> as MRC files or OME-Zarr directories. When downloading all annotations on a Run Overview page, both the MRC file and the OME-Zarr directory will be downloaded for each segmentation mask.</p>
 <h2 id="depositions">Depositions<a class="headerlink" href="#depositions" title="Link to this heading">¶</a></h2>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id4">
 <img alt="Depositions defined" src="_images/depositions.png" />
 <figcaption>
 <p><span class="caption-text"><span class="caption-text">
-Types of depositions</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></figcaption>
+Types of depositions</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></figcaption>
 </figure>
 <p>Depositions are collections of data submitted together. All data being submitted together will be tagged with the same deposition ID. On the Portal, we will surface depositions that contain annotations submitted together. In the future, depositions surfaced on the Portal may include tomograms added to existing datasets or sets of datasets contributed together.</p>
 
