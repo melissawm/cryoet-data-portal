@@ -11,8 +11,7 @@ hide-navigation: true
 :link: api-reference
 :link-type: ref
 
-Information on classes and methods
-:::
+If you prefer to query our API endpoint directly, it's available at https://graphql.cryoetdataportal.czscience.com/graphql.
 
 :::{grid-item-card} Data Model
 :link: data-model
@@ -28,4 +27,3 @@ Visualize the relationships between classes in the Python API
 Log and migration guide for major API releases
 :::
 ::::
-
