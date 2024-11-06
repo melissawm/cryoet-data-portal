@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.2a34f4ce0268c4983.min.css?v=df3fe83d" />
         <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=060a0628" />
+        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=4987f8f5" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -328,7 +328,7 @@
 
   <li class="md-tabs__item">
     <a href="about.html" class="md-tabs__link md-tabs__link--active">
-      <span class="md-ellipsis">About Cryo<wbr>ET</span>
+      <span class="md-ellipsis">About Cryo<wbr>ET Data Portal</span>
     </a>
   </li>
 
@@ -462,12 +462,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="python-api.html"><span class="md-ellipsis">Python API</span></a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Python API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Python API</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
   
     <li class="md-nav__item">
-      <a href="python-api.html" class="md-nav__link">
-        <span class="md-ellipsis">Python API</span>
+      <a href="api_reference.html" class="md-nav__link">
+        <span class="md-ellipsis">API reference</span>
       </a>
     </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data_model.html" class="md-nav__link">
+        <span class="md-ellipsis">Data Model</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        <span class="md-ellipsis">Changelog</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
   
 
     
@@ -589,7 +657,7 @@
       
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="about.html"><span class="md-ellipsis">About Cryo<wbr>ET</span></a>
+          <a href="about.html"><span class="md-ellipsis">About Cryo<wbr>ET Data Portal</span></a>
           
             <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
@@ -597,10 +665,10 @@
           
         </div>
       
-      <nav class="md-nav" aria-label="About CryoET" data-md-level="1">
+      <nav class="md-nav" aria-label="About CryoET Data Portal" data-md-level="1">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
-          <span class="md-ellipsis">About Cryo<wbr>ET</span>
+          <span class="md-ellipsis">About Cryo<wbr>ET Data Portal</span>
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -844,6 +912,21 @@
     <li class="md-nav__item">
       <a href="cryoet_workflow.html" class="md-nav__link">
         <span class="md-ellipsis">Cryo<wbr>ET Workflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="neuroglancer_quickstart.html" class="md-nav__link">
+        <span class="md-ellipsis">Neuroglancer Quick Start</span>
       </a>
     </li>
   
@@ -1282,7 +1365,7 @@ File Structure of a downloaded dataset</span><a class="headerlink" href="#id3" t
 <p>The <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Dataset</span></code> button opens a dialog with instructions for downloading the dataset using <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a>. Datasets are downloaded as folders named the Dataset ID. As shown in the diagram above, the folder contains subfolders for each run named the author-chosen run name, a folder named Images which contains the key photos of the dataset displayed on the Portal, and a JSON file named <code class="docutils literal notranslate"><span class="pre">dataset_metadata.json</span></code> containing the dataset metadata. The run folders contain subfolders named Tomogram and TiltSeries, containing the tomogram and tilt series image files, and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. More details on the run folder file structure is found in the documentation <a class="reference internal" href="#run-download-options">below</a>.</p>
 <p>The metadata schema of any JSON file stored with the data on the data portal’s S3 bucket is described in LinkML and can be found <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal-backend/tree/main/schema">here</a>.</p>
 <h2 id="runs">Runs<a class="headerlink" href="#runs" title="Link to this heading">¶</a></h2>
-<p>A tomography run is a collection of all data and annotations related to one physical location in a sample and is associated with a dataset that typically contains many other runs. On the Data Portal pages, runs are directly linked to their tomograms. However, in the <a class="reference internal" href="python-api.html#data-model"><span class="std std-ref">data schema</span></a> used in the Portal API, runs are connected to tomograms through the <code class="docutils literal notranslate"><span class="pre">TomogramVoxelSpacing</span></code> class which specifies the sampling or voxel size of the tomogram. For a single run, multiple tomograms of different spacings can be available.</p>
+<p>A tomography run is a collection of all data and annotations related to one physical location in a sample and is associated with a dataset that typically contains many other runs. On the Data Portal pages, runs are directly linked to their tomograms. However, in the <a class="reference internal" href="data_model.html#data-model"><span class="std std-ref">data schema</span></a> used in the Portal API, runs are connected to tomograms through the <code class="docutils literal notranslate"><span class="pre">TomogramVoxelSpacing</span></code> class which specifies the sampling or voxel size of the tomogram. For a single run, multiple tomograms of different spacings can be available.</p>
 <p>An overview of all runs in a dataset is presented in the Dataset Overview page. Each run has its own Run Overview Page, where the View All Info panel contains metadata for the run. These metadata are defined in the tables below including their mapping to attributes in the Portal API:</p>
 <p><strong>Tilt Series</strong></p>
 <table class="docutils data align-default">
