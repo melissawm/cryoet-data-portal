@@ -327,6 +327,11 @@ dl.class > dd > dl:nth-child(27) {
   border-bottom: 0.01px solid var(--md-default-fg-color--lightest);
 }
 
+/* Admonitions
+.md-typeset .admonition-title::before {
+  display: none !important;
+} */
+
 /* Figure/video captions */
 .md-typeset figcaption {
   min-width: 75%;

@@ -122,6 +122,18 @@ object_description_options = [
     ("py:.*", dict(include_fields_in_toc=False)),
 ]
 
+sphinx_immaterial_custom_admonitions = [
+    {
+        "name": "note",
+        "title": "Note",
+        "color": "#e9f1ff",
+        "icon": "IconExclamationMarkCircleLarge",
+        "override": True,
+    },
+]
+
+sphinx_immaterial_icon_path = ["./_static/img"]
+
 # -- Options for myst -------------------------------------------------
 myst_enable_extensions = ['colon_fence']
 myst_heading_anchors = 4
