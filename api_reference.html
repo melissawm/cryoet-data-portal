@@ -32,10 +32,10 @@
         <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.2a34f4ce0268c4983.min.css?v=df3fe83d" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.79e8e7c67f0b2f47e.min.css?v=8de33796" />
         <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=4987f8f5" />
+        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=e04e9070" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2605,17 +2605,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -2628,10 +2624,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -2646,13 +2640,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">alignments</span> <span class="o">=</span> <span class="n">Alignment</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Alignment</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">alignments</span> <span class="o">=</span> <span class="n">Alignment</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -2675,9 +2667,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Alignment by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">alignment</span> <span class="o">=</span> <span class="n">Alignment</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">alignment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3029,17 +3021,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -3052,10 +3040,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -3070,13 +3056,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">Annotation</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Annotation</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">Annotation</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3099,9 +3083,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Annotation by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation</span> <span class="o">=</span> <span class="n">Annotation</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3256,17 +3240,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -3279,10 +3259,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -3297,13 +3275,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_authors</span> <span class="o">=</span> <span class="n">AnnotationAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">AnnotationAuthor</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">AnnotationAuthor</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_authors</span> <span class="o">=</span> <span class="n">AnnotationAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3326,9 +3302,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an AnnotationAuthor by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_author</span> <span class="o">=</span> <span class="n">AnnotationAuthor</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">annotation_author</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3483,17 +3459,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -3506,10 +3478,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -3524,13 +3494,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_files</span> <span class="o">=</span> <span class="n">AnnotationFile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3553,9 +3518,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an AnnotationFile by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_file</span> <span class="o">=</span> <span class="n">AnnotationFile</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">annotation_file</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3644,17 +3609,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -3667,10 +3628,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -3685,13 +3644,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_method_links</span> <span class="o">=</span> <span class="n">AnnotationMethodLink</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">AnnotationMethodLink</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">AnnotationMethodLink</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_method_links</span> <span class="o">=</span> <span class="n">AnnotationMethodLink</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3714,9 +3671,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an AnnotationMethodLink by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_method_link</span> <span class="o">=</span> <span class="n">AnnotationMethodLink</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">annotation_method_link</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3794,17 +3751,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -3817,10 +3770,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -3835,13 +3786,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_shapes</span> <span class="o">=</span> <span class="n">AnnotationShape</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">AnnotationShape</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">AnnotationShape</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_shapes</span> <span class="o">=</span> <span class="n">AnnotationShape</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -3864,9 +3813,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an AnnotationShape by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_shape</span> <span class="o">=</span> <span class="n">AnnotationShape</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">annotation_shape</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4266,17 +4215,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -4289,10 +4234,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -4307,13 +4250,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4336,9 +4274,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Dataset by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4493,17 +4431,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -4516,10 +4450,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -4534,13 +4466,12 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<p>Filter dataset authors by attributes, including attributes in related models:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_authors</span> <span class="o">=</span> <span class="n">DatasetAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">DatasetAuthor</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">DatasetAuthor</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_authors</span> <span class="o">=</span> <span class="n">DatasetAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4563,9 +4494,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an DatasetAuthor by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_author</span> <span class="o">=</span> <span class="n">DatasetAuthor</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dataset_author</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4643,17 +4574,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -4666,10 +4593,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -4684,13 +4609,12 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<p>Filter dataset fundings by attributes, including attributes in related models:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_fundings</span> <span class="o">=</span> <span class="n">DatasetFunding</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">DatasetFunding</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_fundings</span> <span class="o">=</span> <span class="n">DatasetFunding</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4713,9 +4637,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an DatasetFunding by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_funding</span> <span class="o">=</span> <span class="n">DatasetFunding</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dataset_funding</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -4936,17 +4860,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -4959,10 +4879,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -4977,13 +4895,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">depositions</span> <span class="o">=</span> <span class="n">Deposition</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5006,9 +4919,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Deposition by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">deposition</span> <span class="o">=</span> <span class="n">Deposition</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">deposition</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5163,17 +5076,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -5186,10 +5095,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -5204,13 +5111,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">deposition_authors</span> <span class="o">=</span> <span class="n">DepositionAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5233,9 +5135,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an DepositionAuthor by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">deposition_author</span> <span class="o">=</span> <span class="n">DepositionAuthor</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">deposition_author</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5302,17 +5204,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -5325,10 +5223,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -5343,13 +5239,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">deposition_types</span> <span class="o">=</span> <span class="n">DepositionType</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5372,9 +5263,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an DepositionType by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">deposition_type</span> <span class="o">=</span> <span class="n">DepositionType</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">deposition_type</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5518,17 +5409,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -5541,10 +5428,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -5559,13 +5444,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frames</span> <span class="o">=</span> <span class="n">Frame</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Frame</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frames</span> <span class="o">=</span> <span class="n">Frame</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5588,9 +5471,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Frame by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frame</span> <span class="o">=</span> <span class="n">Frame</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5668,17 +5551,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -5691,10 +5570,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -5709,13 +5586,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_acquisition_files</span> <span class="o">=</span> <span class="n">FrameAcquisitionFile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">FrameAcquisitionFile</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_acquisition_files</span> <span class="o">=</span> <span class="n">FrameAcquisitionFile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5738,9 +5613,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an FrameAcquisitionFile by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_acquisition_file</span> <span class="o">=</span> <span class="n">FrameAcquisitionFile</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">frame_acquisition_file</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5818,17 +5693,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -5841,10 +5712,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -5859,13 +5728,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">gain_files</span> <span class="o">=</span> <span class="n">GainFile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">GainFile</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">gain_files</span> <span class="o">=</span> <span class="n">GainFile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -5888,9 +5755,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an GainFile by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">gain_file</span> <span class="o">=</span> <span class="n">GainFile</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">gain_file</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -6012,17 +5879,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -6035,10 +5898,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -6053,13 +5914,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">per_section_alignment_parameters</span> <span class="o">=</span> <span class="n">PerSectionAlignmentParameters</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -6082,9 +5938,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an PerSectionAlignmentParameters by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">per_section_alignment_parameters</span> <span class="o">=</span> <span class="n">PerSectionAlignmentParameters</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">per_section_alignment_parameters</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -6275,17 +6131,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -6298,10 +6150,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -6318,7 +6168,7 @@ annotations and related files and metadata from the portal.</p>
 <p class="example rubric">Examples</p>
 <p>Filter runs by attributes, including attributes in related models:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
@@ -6345,9 +6195,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
+<p>Get an Run by ID:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -6822,17 +6672,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -6845,10 +6691,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -6863,13 +6707,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tilt_series</span> <span class="o">=</span> <span class="n">TiltSeries</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">TiltSeries</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tilt_series</span> <span class="o">=</span> <span class="n">TiltSeries</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -6892,9 +6734,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an TiltSeries by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tilt_series</span> <span class="o">=</span> <span class="n">TiltSeries</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tilt_series</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7436,17 +7278,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -7459,10 +7297,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -7477,13 +7313,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomograms</span> <span class="o">=</span> <span class="n">Tomogram</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Tomogram</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomograms</span> <span class="o">=</span> <span class="n">Tomogram</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7506,9 +7340,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an Tomogram by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram</span> <span class="o">=</span> <span class="n">Tomogram</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tomogram</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7663,17 +7497,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -7686,10 +7516,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -7704,13 +7532,8 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
-</code></pre></div>
-</div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram_authors</span> <span class="o">=</span> <span class="n">TomogramAuthor</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7733,9 +7556,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an TomogramAuthor by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram_author</span> <span class="o">=</span> <span class="n">TomogramAuthor</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tomogram_author</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7860,17 +7683,13 @@ annotations and related files and metadata from the portal.</p>
 <dd><p>Find objects based on a set of search filters.</p>
 <p>Search filters are combined with <em>and</em> so all results will match all filters.</p>
 <p>Expressions with python-native operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> <code class="docutils literal notranslate"><span class="pre">{operator}</span></code> <code class="docutils literal notranslate"><span class="pre">{value}</span></code></p>
 <p>Example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name</span> <span class="pre">==</span> <span class="pre">&quot;RUN1&quot;</span></code></p></li>
 </ul>
 <p>Expressions with method operators (<code class="docutils literal notranslate"><span class="pre">like</span></code>, <code class="docutils literal notranslate"><span class="pre">ilike</span></code>, <code class="docutils literal notranslate"><span class="pre">_in</span></code>) must be in the format:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
-</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field.{operator}({value})</span></code></p>
 <p>Examples:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Tomogram.voxel_spacing.run.name.like(&quot;%RUN1%&quot;)</span></code></p></li>
@@ -7883,10 +7702,8 @@ annotations and related files and metadata from the portal.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">_in</span></code> accepts a list of values that are acceptable matches.</p></li>
 </ul>
 <p>Values may be strings or numbers depending on the type of the field being matched, and <cite>_in</cite> supports a list of values of the field’s corresponding type.</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">ModelSubclass.field</span></code> may be an arbitrarily nested path to any field on any related model, such as:
+<code class="docutils literal notranslate"><span class="pre">ModelSubclass.related_class_field.related_field.second_related_class_field.second_field</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -7901,13 +7718,11 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Filter runs by attributes, including attributes in related models:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">_in</span><span class="p">([</span><span class="s1">&#39;TS_026&#39;</span><span class="p">,</span> <span class="s1">&#39;TS_027&#39;</span><span class="p">]),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s1">&#39;%membrane%&#39;</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram_voxel_spacings</span> <span class="o">=</span> <span class="n">TomogramVoxelSpacing</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">TomogramVoxelSpacing</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;TS_026&quot;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <p>Get all results for this type:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram_voxel_spacings</span> <span class="o">=</span> <span class="n">TomogramVoxelSpacing</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>
@@ -7930,9 +7745,9 @@ annotations and related files and metadata from the portal.</p>
 </dd>
 </dl>
 <p class="example rubric">Examples</p>
-<p>Get a Run by ID:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">    print(run.name)</span>
+<p>Get an TomogramVoxelSpacing by ID:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">tomogram_voxel_spacing</span> <span class="o">=</span> <span class="n">TomogramVoxelSpacing</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tomogram_voxel_spacing</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </dd></dl>

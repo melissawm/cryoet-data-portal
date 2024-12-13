@@ -32,10 +32,10 @@
         <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.2a34f4ce0268c4983.min.css?v=df3fe83d" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.79e8e7c67f0b2f47e.min.css?v=8de33796" />
         <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=4987f8f5" />
+        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=e04e9070" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1519,13 +1519,14 @@ File Structure of a downloaded dataset</span><a class="headerlink" href="#id3" t
 <span class="n">run</span><span class="o">.</span><span class="n">download_everything</span><span class="p">()</span>
 </code></pre></div>
 </div>
-<figure class="align-center" id="id4">
-<img alt="File Structure of a downloaded run" src="_images/run_download.png" />
-<figcaption>
-<p><span class="caption-text"><span class="caption-text">
-File Structure of a downloaded run</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></figcaption>
+<figure>
+  <img src="_static/img/run_download.png"
+    alt="File Structure of a downloaded run"
+  >
+  <figcaption>File Structure of a downloaded run
+  </figcaption>
 </figure>
-<p>Runs are downloaded as folders named the author-chosen run name. As shown in the diagram above, the folder contains subfolders named Tomograms and TiltSeries and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. The Tomogram folder has a subfolder for every voxel spacing available, and each of those folders contains subfolders NeuorglancerPrecompute, which has files for visualizing the data in Neuroglancer; KeyPhotos, which contains the key photos of the run displayed on the Portal; CanonicalTomogram, which has the tomogram as an MRC file and OME-Zarr directory along with tomogram metadata and metadata for visualizing the tomogram with Neuroglancer; and Annotations. More details on the Annotation folder file structure is found in the documentation <a class="reference internal" href="#annotation-download-options">below</a>. The TiltSeries folder contains the tilt series images as an MRC file and OME-Zarr directory as well as a JSON file with the tilt series metadata.</p>
+<p>Runs are downloaded as folders named the author-chosen run name. As shown in the diagram above, the folder contains subfolders named Alignments, Frames, Gains, Reconstructions, and TiltSeries; and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. The Alignments folder contains a JSON file for every alignment that specifies the alignment parameters including the affine transformation matrix. The Frames and Gains folders contain the raw movie frames and the gain files for correcting for the detector’s sensitivity, respectively. The TiltSeries folder contains the tilt series images as an MRC file and OME-Zarr directory as well as a JSON file with the tilt series metadata. The Reconstructions folder has a subfolder for every voxel spacing available, and each of those folders contains subfolders NeuorglancerPrecompute, which has files for visualizing the data in Neuroglancer; Images, which contains the key photos of the run displayed on the Portal; Tomograms, which has the tomograms associated with the run as an MRC file and OME-Zarr directory along with tomogram metadata and metadata for visualizing the tomogram with Neuroglancer; and Annotations. More details on the Annotation folder file structure is found in the documentation <a class="reference internal" href="#annotation-download-options">below</a>.</p>
 <h2 id="annotations">Annotations<a class="headerlink" href="#annotations" title="Link to this heading">¶</a></h2>
 <p>Annotations are summarized in a table on Run Overview pages. Each annotation has an Annotation ID, which is assigned by the Portal and is subject to change in the rare case where the annotation data needs to be re-ingested in the Portal. Each annotation labels exactly one type of object, such as ribosome or membrane, indicated by the Object Type column of the table. For every object, there is one type of annotation per entry in the table indicated in the Object Shape Type column. The options are Segmentation for semantic segmentation masks, Instance Segmentation for segmentation masks where each individual object is labeled with its own color, Point for point annotations, and Oriented Point for point annotations that have an associated rotation matrix. The method used for generating the annotation is displayed for each annotation with manual meaning the annotations were created by hand, automated meaning automated tools or algorithms without supervision were used, and hybrid meaning the annotations were generated using a combination of automated and manual methods.</p>
 <p>Annotations also have an optional precision field, which is the percentage of true positives among the total number of positive predictions where a value of 100% means everything found is actually the object of interest, and a recall field, which is the percentage of true positives among the actual number of objects where a value of 100% meaning all objects of interest were found. The Precision and Recall fields can only be calculated by comparing with a ground truth annotation, so for many annotations on the Portal, this field is marked NA for not available.</p>
@@ -1648,11 +1649,11 @@ File Structure of a downloaded run</span><a class="headerlink" href="#id4" title
 <p>Instance Segmentations, Oriented Points, and Points all can be downloaded directly in the browser as Newline Delimited JSON (ndJSON) files, where each line in the file is its own JSON. The download dialog also has instructions for downloading using curl, <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a>. In all cases, the JSON entries have a <code class="docutils literal notranslate"><span class="pre">type</span></code> field with instancePoint, orientedPoint, and point for Instance Segmentations, Oriented Points, and Points, respectively, and a <code class="docutils literal notranslate"><span class="pre">location</span></code> field with the x, y, z coordinates. For Instance Segmentations, there is also an <code class="docutils literal notranslate"><span class="pre">instance_id</span></code> to group points into geometric segmentation masks. For Oriented Points, there is also an <code class="docutils literal notranslate"><span class="pre">xyz_rotation_matrix</span></code> field with a 3x3 rotation matrix corresponding to each point.</p>
 <p>Semantic segmentation masks can downloaded using <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="doc std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="doc std std-doc">Portal API</span></a> as MRC files or OME-Zarr directories. When downloading all annotations on a Run Overview page, both the MRC file and the OME-Zarr directory will be downloaded for each segmentation mask.</p>
 <h2 id="depositions">Depositions<a class="headerlink" href="#depositions" title="Link to this heading">¶</a></h2>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id4">
 <img alt="Depositions defined" src="_images/depositions.png" />
 <figcaption>
 <p><span class="caption-text"><span class="caption-text">
-Types of depositions</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></figcaption>
+Types of depositions</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></figcaption>
 </figure>
 <p>Depositions are collections of data submitted together. All data being submitted together will be tagged with the same deposition ID. On the Portal, we will surface depositions that contain annotations submitted together. In the future, depositions surfaced on the Portal may include tomograms added to existing datasets or sets of datasets contributed together.</p>
 
