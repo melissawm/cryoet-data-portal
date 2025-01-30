@@ -12,7 +12,10 @@ author = "Chan Zuckerberg Initiative"
 
 import cryoet_data_portal
 import logging
+import sys
 from sphinx.util import logging as sphinx_logging
+
+sys.path.insert(0, "../client/python/cryoet_data_portal/src/cryoet_data_portal")
 
 version = cryoet_data_portal.__version__
 
@@ -27,17 +30,24 @@ extensions = [
     "sphinx_immaterial",
     "sphinx_external_toc",
     "sphinx_design",
+    "autoapi.extension",
 ]
 
 napoleon_custom_sections = ["Lifecycle"]
-autodoc_default_options = {
+autoapidoc_default_options = {
     "member-order": "alphabetical",
     "exclude-members": "__init__",
 }
 autodoc_typehints = "none"
 autodoc_class_signature = "separated"
 autoclass_content = "both"
-#autodoc_inherit_docstrings = True
+
+autoapi_dirs = ["../client/python/cryoet_data_portal/src/cryoet_data_portal"]
+autoapi_type = "python"
+autoapi_generate_api_docs = True
+autoapi_template_dir = "_templates/autoapi"
+autoapi_root = "reference"
+autoapi_keep_files = True
 
 tiledb_version = "latest"
 

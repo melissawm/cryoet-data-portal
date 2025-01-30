@@ -6,7 +6,6 @@ hide-navigation: true
 # API reference
 
 ```{eval-rst}
-.. automodule:: cryoet_data_portal
-   :members:
-   :inherited-members:
+.. include:: reference/cryoet_data_portal/index.rst
 ```
+
