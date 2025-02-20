@@ -8,4 +8,3 @@ hide-navigation: true
 ```{eval-rst}
 .. include:: reference/cryoet_data_portal/index.rst
 ```
-

@@ -1,3 +1,5 @@
+.. currentmodule:: cryoet_data_portal
+
 {% if obj.display %}
    {% set visible_children = obj.children|selectattr("display")|list %}
 
@@ -23,9 +25,9 @@
    {{ attribute.id }}
          {% endfor %}
       {% endif %}
-      {% for obj_item in visible_children %}
+      {% for obj_item in visible_children|rejectattr("type", "equalto", "attribute")|list %}
 
-.. autoapi{{obj_item.type}}:: {{ obj_item.short_name }}{% if obj_item.args %}({{ obj_item.args }}){% endif %}
+.. autoapi{{obj_item.type}}:: {{ obj_item.name }}
 
       {% endfor %}
    {% endif %}

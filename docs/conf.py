@@ -18,12 +18,11 @@ from sphinx.util import logging as sphinx_logging
 sys.path.insert(0, "../client/python/cryoet_data_portal/src/cryoet_data_portal")
 
 version = cryoet_data_portal.__version__
-
+print(f"Building documentation for version {version}")
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "myst_nb",
@@ -34,6 +33,7 @@ extensions = [
 ]
 
 napoleon_custom_sections = ["Lifecycle"]
+napoleon_use_ivar = False
 autoapidoc_default_options = {
     "member-order": "alphabetical",
     "exclude-members": "__init__",

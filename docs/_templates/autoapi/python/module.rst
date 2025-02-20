@@ -1,5 +1,7 @@
 .. py:module:: {{ obj.name }}
 
+.. currentmodule:: {{ obj.name }}
+
 {% if obj.docstring %}
 .. autoapi-nested-parse::
 
@@ -14,7 +16,12 @@
       {% if this_page_children %}
          {% for obj_item in this_page_children %}
 {{ obj_item.render()|indent(0) }}
+
+----------------------------------------------------------------------------------------------------------------------------
+
          {% endfor %}
       {% endif %}
    {% endif %}
 {% endblock %}
+
+END.
