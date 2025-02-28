@@ -201,31 +201,34 @@ def format_attributes(item):
         # 3 -> <dd><p>Voxel spacings for a run</p>
         #        <dl class="py attribute objdesc"> ... (including methods)
         desc = c.contents[3]
-
         # Create table structure
-        attributes_table = soup.new_tag("table")
-        attributes_table["class"] = "docutils field-list"
-        attributes_table.append(soup.new_tag("thead"))
-        attributes_table.thead.append(soup.new_tag("tr"))
-        attributes_table.thead.tr.append(soup.new_tag("th")).append("Attribute")
-        attributes_table.thead.tr.append(soup.new_tag("th")).append("Type")
-        attributes_table.thead.tr.append(soup.new_tag("th")).append("Description")
-        attributes_table.append(soup.new_tag("tbody"))
+        attributes = BeautifulSoup("<div></div>", "html.parser")
+        attributes.div.append(attributes.new_tag("span", attrs={"class": "doc-section-title"}))
+        attributes.div.span.append("Attributes:")
+        attributes.div.append(attributes.new_tag('table'))
+        attributes.div.table["class"] = "docutils field-list"
+        attributes.div.table.append(soup.new_tag("thead"))
+        attributes.div.table.thead.append(soup.new_tag("tr"))
+        attributes.div.table.thead.tr.append(soup.new_tag("th")).append("Attribute")
+        attributes.div.table.thead.tr.append(soup.new_tag("th")).append("Type")
+        attributes.div.table.thead.tr.append(soup.new_tag("th")).append("Description")
+        attributes.div.table.append(soup.new_tag("tbody"))
         i = 0
         for child in desc.children:
             if child.name=="dl" and "attribute" in child["class"]:
+                # create a copy of attributes to be used in the loop
+                table = 
                 attr_name = child.dt.span.span
                 attr_type = child.dd.dl.dd.p
                 attr_desc = child.dd.p
-                new_row = soup.new_tag("tr", attrs={"id": f"row{i}"})
-                new_row.append(soup.new_tag("td")).append(attr_name)
-                new_row.append(soup.new_tag("td")).append(attr_type)
-                new_row.append(soup.new_tag("td")).append(attr_desc)
-                attributes_table.tbody.append(new_row)
-                child.replace_with(attributes_table)
+                new_row = attributes.new_tag("tr", attrs={"id": f"row{i}"})
+                new_row.append(attributes.new_tag("td")).append(attr_name)
+                new_row.append(attributes.new_tag("td")).append(attr_type)
+                new_row.append(attributes.new_tag("td")).append(attr_desc)
+                attributes.div.table.tbody.append(new_row)
+                child.replace_with(attributes.div)
                 i += 1
-    item = str(soup)
-    return item
+    return str(soup)
 
 FILTERS["format_attributes"] = format_attributes
 
