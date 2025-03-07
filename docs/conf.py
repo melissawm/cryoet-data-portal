@@ -217,7 +217,7 @@ def format_attributes(item):
         for child in desc.children:
             if child.name=="dl" and "attribute" in child["class"]:
                 # create a copy of attributes to be used in the loop
-                table = 
+                #table = 
                 attr_name = child.dt.span.span
                 attr_type = child.dd.dl.dd.p
                 attr_desc = child.dd.p
