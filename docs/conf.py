@@ -65,7 +65,7 @@ external_toc_exclude_missing = True
 # Inject custom css files in `/_static/css/*`
 html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
-html_js_files = ["js/faq.js"]
+html_js_files = ["js/faq.js", "js/version_redirect.js"]
 
 html_logo = ""
 html_title = "CryoET Data Portal Documentation"
@@ -116,18 +116,7 @@ html_theme_options = {
         "code": "Roboto Mono",  # used for literal code blocks
     },
     "version_dropdown": True,
-    "version_info": [
-        {
-            "version": "dev", # version number or path
-            "title": "Latest",
-            "aliases": [],
-        },
-        {
-            "version": "v4.0",
-            "title": "Stable (v4.0)",
-            "aliases": ["stable"],
-        },
-    ],
+    "version_json": "doc_versions.json",
 }
 
 # Remove icons from toc elements in API page
