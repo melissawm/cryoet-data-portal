@@ -65,7 +65,7 @@ external_toc_exclude_missing = True
 # Inject custom css files in `/_static/css/*`
 html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
-html_js_files = ["js/faq.js"]
+html_js_files = ["js/faq.js", "js/version_redirect.js"]
 
 html_logo = ""
 html_title = "CryoET Data Portal Documentation"
@@ -121,11 +121,13 @@ html_theme_options = {
             "version": "dev", # version number or path
             "title": "Latest",
             "aliases": [],
+            "redirect": "dev/{page}"
         },
         {
             "version": "v4.0",
             "title": "Stable (v4.0)",
             "aliases": ["stable"],
+            "redirect": "v4.0/{page}"
         },
     ],
 }
